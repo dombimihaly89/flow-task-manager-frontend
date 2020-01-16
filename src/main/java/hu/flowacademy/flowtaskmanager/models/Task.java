@@ -2,7 +2,6 @@ package hu.flowacademy.flowtaskmanager.models;
 
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,9 +28,7 @@ public class Task {
 
     private List<User> users;
 
-    private List<Comment> comments;
-
-    private List<Solution> solution;
+    private List<Post> posts;
 
     public enum Type {
         JAVA,

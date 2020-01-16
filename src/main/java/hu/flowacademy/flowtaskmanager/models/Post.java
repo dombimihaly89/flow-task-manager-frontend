@@ -3,9 +3,10 @@ package hu.flowacademy.flowtaskmanager.models;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
-public class Comment {
+public class Post {
 
     private Long id;
 
@@ -21,5 +22,12 @@ public class Comment {
 
     private Task task;
 
-    private Solution solution;
+    private Type type;
+
+    private List<Post> comments;
+
+    public enum Type {
+        COMMENT,
+        SOLUTION
+    }
 }

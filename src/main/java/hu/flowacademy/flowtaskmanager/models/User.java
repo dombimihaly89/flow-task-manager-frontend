@@ -22,9 +22,7 @@ public class User {
 
     private List<Task> tasks;
 
-    private List<Comment> lists;
-
-    private List<Solution> solutions;
+    private List<Post> posts;
 
     public enum Role {
         MENTOR,
