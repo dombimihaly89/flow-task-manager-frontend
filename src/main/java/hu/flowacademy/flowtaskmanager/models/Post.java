@@ -30,16 +30,14 @@ public class Post {
     @Column
     private Type type;
 
-    @Column
     @ManyToOne
     private Task task;
 
-    @Column
     @ManyToOne
     private User user;
 
-    @Column
-    @ManyToOne
+    @ManyToMany
+    @JoinColumn
     private List<Post> comments;
 
     public enum Type {
