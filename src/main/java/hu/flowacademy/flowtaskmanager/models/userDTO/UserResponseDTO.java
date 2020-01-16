@@ -27,4 +27,15 @@ public class UserResponseDTO {
     private List<Task> tasks;
 
     private List<Post> posts;
+
+    public void userDTOFromUser(User user) {
+        this.id = user.getId();
+        this.userName = user.getUserName();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.dateOfBirth = user.getDateOfBirth();
+        this.role = user.getRole();
+        this.tasks = user.getTasks();
+        this.posts = user.getPosts();
+    }
 }

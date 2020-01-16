@@ -1,5 +1,7 @@
 package hu.flowacademy.flowtaskmanager.models;
 
+import hu.flowacademy.flowtaskmanager.models.userDTO.UserLoginDTO;
+import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,6 +33,7 @@ public class User {
     private LocalDate dateOfBirth;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Column
@@ -44,6 +47,20 @@ public class User {
     public enum Role {
         MENTOR,
         STUDENT
+    }
+
+    public void userFromUserDTO(UserRegisterDTO userRegisterDTO) {
+        this.userName = userRegisterDTO.getUserName();
+        this.password = userRegisterDTO.getPassword();
+        this.firstName = userRegisterDTO.getFirstName();
+        this.lastName = userRegisterDTO.getLastName();
+        this.dateOfBirth = userRegisterDTO.getDateOfBirth();
+        this.role = userRegisterDTO.getRole();
+    }
+
+    public void userFromUserDTO(UserLoginDTO userLoginDTO) {
+        this.userName = userLoginDTO.getUserName();
+        this.password = userLoginDTO.getPassword();
     }
 
 
