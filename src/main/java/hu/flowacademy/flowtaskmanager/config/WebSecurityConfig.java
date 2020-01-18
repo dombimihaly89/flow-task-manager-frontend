@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements R
         http.authorizeRequests()
                 .antMatchers("/", "/login", "/oauth/**", "/oauth/token/revokeById/**", "/tokens/**").permitAll()
                 .antMatchers("/api/users/register").permitAll()
-                .antMatchers("/api/users", "/api/users/**").hasAnyAuthority(User.Role.MENTOR.name())
+                .antMatchers("/api/users", "/api/users/**").hasAnyAuthority(User.Role.MENTOR.name()) //, User.Role.STUDENT.name()
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll()
                 .and().csrf().disable();

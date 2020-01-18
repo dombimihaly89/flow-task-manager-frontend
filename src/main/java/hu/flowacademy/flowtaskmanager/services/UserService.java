@@ -27,8 +27,6 @@ public class UserService {
         return userRepository.findByUsername(name);
     }
 
-    // Ugyanazzal a username-el ne lehessen beregisztrálni
-    // Ha update-eljük a user-t, akkor figyelni az újabb password encode-olásra.
     public User saveUser(UserRegisterDTO userRegisterDTO) {
         User user = new User();
         user.userFromUserDTO(userRegisterDTO);

@@ -17,16 +17,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/findbyid{id}")
-    public ResponseEntity<UserResponseDTO> findUserById(@RequestParam Long id) {
+    @GetMapping("/{id}/ids")
+    public ResponseEntity<UserResponseDTO> findUserById(@PathVariable Long id) {
         User user =  userService.findUserById(id);
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.userDTOFromUser(user);
         return ResponseEntity.ok(userResponseDTO);
     }
 
-    @GetMapping("/findbyname{username}")
-    public ResponseEntity<UserResponseDTO> findUserByName(@RequestParam String username) {
+    @GetMapping("/{username}/names")
+    public ResponseEntity<UserResponseDTO> findUserByName(@PathVariable String username) {
         User user = userService.findUserByName(username);
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.userDTOFromUser(user);
