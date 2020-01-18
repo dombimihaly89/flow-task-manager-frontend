@@ -25,9 +25,9 @@ public class UserController {
         return ResponseEntity.ok(userResponseDTO);
     }
 
-    @GetMapping("/findbyname{userName}")
-    public ResponseEntity<UserResponseDTO> findUserByName(@RequestParam String userName) {
-        User user = userService.findUserByName(userName);
+    @GetMapping("/findbyname{username}")
+    public ResponseEntity<UserResponseDTO> findUserByName(@RequestParam String username) {
+        User user = userService.findUserByName(username);
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.userDTOFromUser(user);
         return ResponseEntity.ok(userResponseDTO);

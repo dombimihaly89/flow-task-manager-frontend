@@ -79,7 +79,7 @@ public class User implements UserDetails {
     }
 
     public void userFromUserDTO(UserRegisterDTO userRegisterDTO) {
-        this.username = userRegisterDTO.getUserName();
+        this.username = userRegisterDTO.getUsername();
         this.password = userRegisterDTO.getPassword();
         this.firstName = userRegisterDTO.getFirstName();
         this.lastName = userRegisterDTO.getLastName();
@@ -88,7 +88,7 @@ public class User implements UserDetails {
     }
 
     public void userFromUserDTO(UserLoginDTO userLoginDTO) {
-        this.username = userLoginDTO.getUserName();
+        this.username = userLoginDTO.getUsername();
         this.password = userLoginDTO.getPassword();
     }
 

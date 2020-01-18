@@ -13,7 +13,7 @@ public class UserResponseDTO {
 
     private Long id;
 
-    private String userName;
+    private String username;
 
     private String firstName;
 
@@ -29,7 +29,7 @@ public class UserResponseDTO {
 
     public void userDTOFromUser(User user) {
         this.id = user.getId();
-        this.userName = user.getUsername();
+        this.username = user.getUsername();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.dateOfBirth = user.getDateOfBirth();
