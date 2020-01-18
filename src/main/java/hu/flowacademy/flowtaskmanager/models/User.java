@@ -79,6 +79,7 @@ public class User implements UserDetails {
     }
 
     public void userFromUserDTO(UserRegisterDTO userRegisterDTO) {
+        this.id = userRegisterDTO.getId();
         this.username = userRegisterDTO.getUsername();
         this.password = userRegisterDTO.getPassword();
         this.firstName = userRegisterDTO.getFirstName();

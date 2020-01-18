@@ -21,7 +21,7 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User findUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return userRepository.findById(id).orElseThrow(null);
     }
 
     public User findUserByName(String name) {
@@ -30,16 +30,44 @@ public class UserService {
 
     public User saveUser(UserRegisterDTO userRegisterDTO) {
         User user = new User();
-        user.userFromUserDTO(userRegisterDTO);
-        usernameValidator(user);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return user;
+        if (userRegisterDTO.getId() == null) {
+            user.userFromUserDTO(userRegisterDTO);
+            usernameValidator(user);
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        } else {
+            user = findUserById(userRegisterDTO.getId());
+            user.setRole(userRegisterDTO.getRole());
+        }
+        return userRepository.save(user);
     }
 
     public void usernameValidator(User user) {
         if (findUserByName(user.getUsername()) != null) {
             throw new ValidationException("There is a registered user with this username.");
+        }
+    }
+
+    public void usernameEqualityValidator(User user) {
+        if (findUserById(user.getId()).getUsername() != user.getUsername()) {
+            throw new ValidationException("You cannot change the username.");
+        }
+    }
+
+    public void dateOfBirthEqualityValidator(User user) {
+        if (findUserById(user.getId()).getDateOfBirth() != user.getDateOfBirth()) {
+            throw new ValidationException("You cannot change your date of birth.");
+        }
+    }
+
+    public void firstnameEqualityValidator(User user) {
+        if (findUserById(user.getId()).getFirstName() != user.getFirstName()) {
+            throw new ValidationException("You cannot change your firstname.");
+        }
+    }
+
+    public void lastnameEqualityValidator(User user) {
+        if (findUserById(user.getId()).getLastName() != user.getLastName()) {
+            throw new ValidationException("You cannot change your lastname.");
         }
     }
 }

@@ -1,5 +1,6 @@
 package hu.flowacademy.flowtaskmanager.controllers;
 
+import hu.flowacademy.flowtaskmanager.exceptions.ValidationException;
 import hu.flowacademy.flowtaskmanager.models.User;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserResponseDTO;
@@ -35,6 +36,17 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserResponseDTO> userRegister(@RequestBody UserRegisterDTO userRegisterDTO) {
+        User user = userService.saveUser(userRegisterDTO);
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        userResponseDTO.userDTOFromUser(user);
+        return ResponseEntity.ok(userResponseDTO);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<UserResponseDTO> userUpdate(@RequestBody UserRegisterDTO userRegisterDTO) {
+        User userInDb = userService.findUserByName(userRegisterDTO.getUsername());
+        if (userInDb == null) throw new ValidationException("There is no user with this username: " + userRegisterDTO.getUsername());
+        userRegisterDTO.setId(userInDb.getId());
         User user = userService.saveUser(userRegisterDTO);
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.userDTOFromUser(user);
