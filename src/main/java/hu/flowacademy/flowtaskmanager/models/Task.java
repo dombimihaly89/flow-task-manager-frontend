@@ -1,10 +1,14 @@
 package hu.flowacademy.flowtaskmanager.models;
 
+import hu.flowacademy.flowtaskmanager.models.TaskDTO.TaskDTO;
+import hu.flowacademy.flowtaskmanager.services.UserService;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -40,13 +44,24 @@ public class Task {
     @OneToMany
     private List<Rating> ratings;
 
-    @Column
+    @ManyToOne
+    private User mentor;
+
     @ManyToMany
     private List<User> users;
 
     @Column
     @OneToMany
     private List<Post> posts;
+
+    public void taskFromTaskDTO(TaskDTO taskDTO) {
+        this.type = taskDTO.getType();
+        this.title = taskDTO.getTitle();
+        this.content = taskDTO.getContent();
+        this.difficulty = taskDTO.getDifficulty();
+        this.ratings = taskDTO.getRatings();
+        this.mentor = taskDTO.getMentor();
+    }
 
     public enum Type {
         JAVA,

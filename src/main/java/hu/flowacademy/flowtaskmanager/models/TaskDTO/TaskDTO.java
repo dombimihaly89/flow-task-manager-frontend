@@ -9,6 +9,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class TaskDTO {
@@ -29,10 +30,27 @@ public class TaskDTO {
 
     private LocalDateTime deletedAt;
 
+    private User mentor;
+
     private List<Rating> ratings;
 
-    private Long userId;
+    private List<Long> userIds;
 
-    private List<Post> posts;
+    private List<Long> postIds;
+
+    public void taskDTOFromTask(Task task) {
+        this.id = task.getId();
+        this.type = task.getType();
+        this.title = task.getTitle();
+        this.content = task.getContent();
+        this.difficulty = task.getDifficulty();
+        this.createdAt = task.getCreatedAt();
+        this.updatedAt = task.getUpdatedAt();
+        this.deletedAt = task.getDeletedAt();
+        this.mentor = task.getMentor();
+        this.ratings = task.getRatings();
+        this.userIds = task.getUsers().stream().map(x -> x.getId()).collect(Collectors.toList());
+        // this.postIds = task.getPosts().stream().map(x -> x.getId()).collect(Collectors.toList());
+    }
 
 }

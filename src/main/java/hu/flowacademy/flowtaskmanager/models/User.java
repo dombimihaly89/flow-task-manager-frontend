@@ -41,7 +41,7 @@ public class User implements UserDetails {
     private Role role;
 
     @Column
-    @ManyToMany
+    @ManyToMany(targetEntity = Task.class, mappedBy = "users", fetch = FetchType.EAGER)
     private List<Task> tasks;
 
     @Column
