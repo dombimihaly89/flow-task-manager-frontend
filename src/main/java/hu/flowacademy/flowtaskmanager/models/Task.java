@@ -16,10 +16,11 @@ import java.util.stream.Collectors;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     @Column
@@ -29,6 +30,7 @@ public class Task {
     private String content;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
 
     @Column
@@ -60,7 +62,6 @@ public class Task {
         this.content = taskDTO.getContent();
         this.difficulty = taskDTO.getDifficulty();
         this.ratings = taskDTO.getRatings();
-        this.mentor = taskDTO.getMentor();
     }
 
     public enum Type {

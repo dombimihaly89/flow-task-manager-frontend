@@ -30,7 +30,7 @@ public class TaskDTO {
 
     private LocalDateTime deletedAt;
 
-    private User mentor;
+    private Long mentorId;
 
     private List<Rating> ratings;
 
@@ -47,7 +47,7 @@ public class TaskDTO {
         this.createdAt = task.getCreatedAt();
         this.updatedAt = task.getUpdatedAt();
         this.deletedAt = task.getDeletedAt();
-        this.mentor = task.getMentor();
+        this.mentorId = task.getMentor().getId();
         this.ratings = task.getRatings();
         this.userIds = task.getUsers().stream().map(x -> x.getId()).collect(Collectors.toList());
         // this.postIds = task.getPosts().stream().map(x -> x.getId()).collect(Collectors.toList());

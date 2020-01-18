@@ -25,6 +25,7 @@ public class TaskService {
     public Task saveTask(TaskDTO taskDTO) {
         Task task = new Task();
         task.taskFromTaskDTO(taskDTO);
+        task.setMentor(userService.findUserById(taskDTO.getMentorId()));
         task.setCreatedAt(LocalDateTime.now());
         task.setUsers(taskDTO.getUserIds().stream().map(x -> userService.findUserById(x)).collect(Collectors.toList()));
         // this.posts = taskDTO.getPostIds().stream().map(x -> postService.findPostById(x)).collet(Collectors.toList());
