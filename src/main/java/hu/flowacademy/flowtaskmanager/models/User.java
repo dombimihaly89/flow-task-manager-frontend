@@ -3,22 +3,26 @@ package hu.flowacademy.flowtaskmanager.models;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserLoginDTO;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Data
 @Entity
-@Table
-public class User {
+@Table(name = "_users")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
-    private String userName;
+    private String username;
 
     @Column
     private String password;
@@ -44,13 +48,38 @@ public class User {
     @OneToMany
     private List<Post> posts;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.role.name()));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public enum Role {
         MENTOR,
         STUDENT
     }
 
     public void userFromUserDTO(UserRegisterDTO userRegisterDTO) {
-        this.userName = userRegisterDTO.getUserName();
+        this.username = userRegisterDTO.getUserName();
         this.password = userRegisterDTO.getPassword();
         this.firstName = userRegisterDTO.getFirstName();
         this.lastName = userRegisterDTO.getLastName();
@@ -59,7 +88,7 @@ public class User {
     }
 
     public void userFromUserDTO(UserLoginDTO userLoginDTO) {
-        this.userName = userLoginDTO.getUserName();
+        this.username = userLoginDTO.getUserName();
         this.password = userLoginDTO.getPassword();
     }
 

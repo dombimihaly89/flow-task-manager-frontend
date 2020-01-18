@@ -5,7 +5,6 @@ import hu.flowacademy.flowtaskmanager.models.Task;
 import hu.flowacademy.flowtaskmanager.models.User;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class UserResponseDTO {
 
     public void userDTOFromUser(User user) {
         this.id = user.getId();
-        this.userName = user.getUserName();
+        this.userName = user.getUsername();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.dateOfBirth = user.getDateOfBirth();

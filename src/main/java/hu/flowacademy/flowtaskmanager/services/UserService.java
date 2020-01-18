@@ -24,9 +24,10 @@ public class UserService {
     }
 
     public User findUserByName(String name) {
-        return userRepository.findByUserName(name);
+        return userRepository.findByUsername(name);
     }
 
+    // Ugyanazzal a username-el ne lehessen beregisztrálni
     public User saveUser(UserRegisterDTO userRegisterDTO) {
         User user = new User();
         user.userFromUserDTO(userRegisterDTO);
