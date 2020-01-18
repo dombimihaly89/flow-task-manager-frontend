@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -31,4 +33,13 @@ public class TaskController {
         taskDTO.taskDTOFromTask(task);
         return ResponseEntity.ok(taskDTO);
     }
+
+    @PostMapping("/rate{id}{rating}")
+    public ResponseEntity<TaskDTO> rateTask(@RequestParam Long id, @RequestParam Integer rating) {
+        Task task = taskService.addRating(id, rating);
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.taskDTOFromTask(task);
+        return ResponseEntity.ok(taskDTO);
+    }
+
 }

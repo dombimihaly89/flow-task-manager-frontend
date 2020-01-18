@@ -15,4 +15,8 @@ public class Rating {
 
     @Column
     private Integer rating;
+
+    public Rating(Integer rating) {
+        this.rating = rating;
+    }
 }
