@@ -1,5 +1,6 @@
 package hu.flowacademy.flowtaskmanager.services;
 
+import hu.flowacademy.flowtaskmanager.exceptions.ValidationException;
 import hu.flowacademy.flowtaskmanager.models.User;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserResponseDTO;
@@ -30,8 +31,15 @@ public class UserService {
     public User saveUser(UserRegisterDTO userRegisterDTO) {
         User user = new User();
         user.userFromUserDTO(userRegisterDTO);
+        usernameValidator(user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
+    }
+
+    public void usernameValidator(User user) {
+        if (findUserByName(user.getUsername()) != null) {
+            throw new ValidationException("There is a registered user with this username.");
+        }
     }
 }
