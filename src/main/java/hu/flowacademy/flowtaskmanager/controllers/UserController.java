@@ -11,27 +11,34 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{userName}")
-    public ResponseEntity<UserResponseDTO> findUserByName(@PathVariable String userName) {
+    @GetMapping("/findbyid{id}")
+    public ResponseEntity<UserResponseDTO> findUserById(@RequestParam Long id) {
+        User user =  userService.findUserById(id);
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        userResponseDTO.userDTOFromUser(user);
+        return ResponseEntity.ok(userResponseDTO);
+    }
+
+    @GetMapping("/findbyname{userName}")
+    public ResponseEntity<UserResponseDTO> findUserByName(@RequestParam String userName) {
         User user = userService.findUserByName(userName);
         UserResponseDTO userResponseDTO = new UserResponseDTO();
-        userResponseDTO.userDTOFromUser(userService.findUserByName(userName));
+        userResponseDTO.userDTOFromUser(user);
         return ResponseEntity.ok(userResponseDTO);
     }
 
     @PostMapping("/register")
     public ResponseEntity<UserResponseDTO> userRegister(@RequestBody UserRegisterDTO userRegisterDTO) {
-        User user = userService.addNewUser(userRegisterDTO);
+        User user = userService.saveUser(userRegisterDTO);
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.userDTOFromUser(user);
         return ResponseEntity.ok(userResponseDTO);
-
     }
 
 }
