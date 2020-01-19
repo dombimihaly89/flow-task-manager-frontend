@@ -1,6 +1,8 @@
 package hu.flowacademy.flowtaskmanager.controllers;
 
 import hu.flowacademy.flowtaskmanager.exceptions.ValidationException;
+import hu.flowacademy.flowtaskmanager.models.Task;
+import hu.flowacademy.flowtaskmanager.models.TaskDTO.TaskDTO;
 import hu.flowacademy.flowtaskmanager.models.User;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserResponseDTO;
@@ -10,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -17,6 +22,17 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping
+    public ResponseEntity<List<UserResponseDTO>> findAllUsers() {
+        List<User> listOfUsers = userService.findAllUsers();
+        List<UserResponseDTO> listOfDTOs = listOfUsers.stream().map(user -> {
+            UserResponseDTO userResponseDTO = new UserResponseDTO();
+            userResponseDTO.userDTOFromUser(user);
+            return userResponseDTO;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(listOfDTOs);
+    }
 
     @GetMapping("/{id}/ids")
     public ResponseEntity<UserResponseDTO> findUserById(@PathVariable Long id) {

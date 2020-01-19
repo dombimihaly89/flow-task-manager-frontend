@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @Transactional
@@ -24,6 +26,10 @@ public class UserService {
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(null);
+    }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 
     public User findUserByName(String name) {
@@ -76,4 +82,5 @@ public class UserService {
     public void userDelete(Long id) {
         userRepository.deleteById(id);
     }
+
 }
