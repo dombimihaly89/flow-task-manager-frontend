@@ -10,12 +10,14 @@ import hu.flowacademy.flowtaskmanager.repositories.RatingRepository;
 import hu.flowacademy.flowtaskmanager.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class TaskService {
 
     @Autowired
@@ -26,6 +28,10 @@ public class TaskService {
 
     @Autowired
     private RatingRepository ratingRepository;
+
+    public List<Task> findAllTasks() {
+        return taskRepository.findAll();
+    }
 
     public Task findTaskById(Long id) {
         return taskRepository.findById(id).orElseThrow(null);
@@ -47,7 +53,8 @@ public class TaskService {
         Task task =  findTaskById(id);
         if (task == null) throw new ValidationException("There is no user with this ID.");
         Rating newRating = new Rating(rating);
-        task.getRatings().add(ratingRepository.save(newRating));
+        ratingRepository.save(newRating);
+        task.getRatings().add(newRating);
         return task;
     }
 
@@ -59,4 +66,10 @@ public class TaskService {
         taskRepository.save(task);
         return task;
     }
+
+    public void delete(Long id) {
+        taskRepository.deleteById(id);
+    }
+
+
 }

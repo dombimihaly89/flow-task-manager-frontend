@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -19,6 +21,17 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+
+    @GetMapping("/findall")
+    public ResponseEntity<List<TaskDTO>> findAllTasks() {
+        List<Task> listOfTasks = taskService.findAllTasks();
+        List<TaskDTO> listOfDTOs = listOfTasks.stream().map(t -> {
+            TaskDTO taskDTO = new TaskDTO();
+            taskDTO.taskDTOFromTask(t);
+            return taskDTO;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(listOfDTOs);
+    }
 
     @GetMapping("/{id}/ids")
     public ResponseEntity<TaskDTO> findTaskById(@PathVariable Long id) {
@@ -49,5 +62,12 @@ public class TaskController {
         taskDTO.taskDTOFromTask(task);
         return ResponseEntity.ok(taskDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+        taskService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
 
 }
