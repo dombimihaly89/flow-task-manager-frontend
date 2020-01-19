@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class UserService {
 
     private UserRepository userRepository;
@@ -69,5 +71,9 @@ public class UserService {
         if (findUserById(user.getId()).getLastName() != user.getLastName()) {
             throw new ValidationException("You cannot change your lastname.");
         }
+    }
+
+    public void userDelete(Long id) {
+        userRepository.deleteById(id);
     }
 }
