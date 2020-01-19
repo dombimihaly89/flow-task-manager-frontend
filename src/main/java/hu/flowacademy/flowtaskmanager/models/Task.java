@@ -57,6 +57,7 @@ public class Task {
     private List<Post> posts;
 
     public void taskFromTaskDTO(TaskDTO taskDTO) {
+        this.id = taskDTO.getId();
         this.type = taskDTO.getType();
         this.title = taskDTO.getTitle();
         this.content = taskDTO.getContent();

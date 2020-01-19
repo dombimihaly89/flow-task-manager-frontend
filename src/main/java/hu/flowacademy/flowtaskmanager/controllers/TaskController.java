@@ -1,5 +1,6 @@
 package hu.flowacademy.flowtaskmanager.controllers;
 
+import hu.flowacademy.flowtaskmanager.exceptions.ValidationException;
 import hu.flowacademy.flowtaskmanager.models.Task;
 import hu.flowacademy.flowtaskmanager.models.TaskDTO.TaskDTO;
 import hu.flowacademy.flowtaskmanager.models.User;
@@ -38,6 +39,13 @@ public class TaskController {
     public ResponseEntity<TaskDTO> rateTask(@RequestParam Long id, @RequestParam Integer rating) {
         Task task = taskService.addRating(id, rating);
         TaskDTO taskDTO = new TaskDTO();
+        taskDTO.taskDTOFromTask(task);
+        return ResponseEntity.ok(taskDTO);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<TaskDTO> updateTask(@RequestBody TaskDTO taskDTO) {
+        Task task = taskService.updateTask(taskDTO);
         taskDTO.taskDTOFromTask(task);
         return ResponseEntity.ok(taskDTO);
     }

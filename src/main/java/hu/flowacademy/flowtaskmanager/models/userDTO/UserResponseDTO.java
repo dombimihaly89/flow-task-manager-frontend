@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class UserResponseDTO {
@@ -23,9 +24,9 @@ public class UserResponseDTO {
 
     private User.Role role;
 
-    private List<Task> tasks;
+    private List<Long> taskIds;
 
-    private List<Post> posts;
+    private List<Long> postIds;
 
     public void userDTOFromUser(User user) {
         this.id = user.getId();
@@ -34,7 +35,8 @@ public class UserResponseDTO {
         this.lastName = user.getLastName();
         this.dateOfBirth = user.getDateOfBirth();
         this.role = user.getRole();
-        this.tasks = user.getTasks();
-        this.posts = user.getPosts();
+        if (user.getTasks() == null) this.taskIds = null;
+        else this.taskIds = user.getTasks().stream().map(x -> x.getId()).collect(Collectors.toList());
+        this.postIds = null;
     }
 }
