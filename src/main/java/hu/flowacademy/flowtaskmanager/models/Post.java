@@ -1,5 +1,6 @@
 package hu.flowacademy.flowtaskmanager.models;
 
+import hu.flowacademy.flowtaskmanager.models.postDTO.PostDTO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -39,6 +40,12 @@ public class Post {
     @ManyToMany
     @JoinColumn
     private List<Post> comments;
+
+    public void postFromPostDTO(PostDTO postDTO) {
+        this.id = postDTO.getId();
+        this.content = postDTO.getContent();
+        this.type = postDTO.getType();
+    }
 
     public enum Type {
         COMMENT,
