@@ -27,6 +27,9 @@ public class TaskService {
     private UserService userService;
 
     @Autowired
+    private PostService postService;
+
+    @Autowired
     private RatingRepository ratingRepository;
 
     public List<Task> findAllTasks() {
@@ -45,7 +48,7 @@ public class TaskService {
         }
         task.setCreatedAt(LocalDateTime.now());
         task.setUsers(taskDTO.getUserIds().stream().map(x -> userService.findUserById(x)).collect(Collectors.toList()));
-        // this.posts = taskDTO.getPostIds().stream().map(x -> postService.findPostById(x)).collet(Collectors.toList());
+        // task.setPosts(taskDTO.getPostIds().stream().map(x -> postService.findPostById(x)).collect(Collectors.toList()));
         return taskRepository.save(task);
     }
 
@@ -72,4 +75,8 @@ public class TaskService {
     }
 
 
+    public void savePostToTask(Long taskId, Long postId) {
+        Task task = findTaskById(taskId);
+        task.getPosts().add(postService.findPostById(postId));
+    }
 }

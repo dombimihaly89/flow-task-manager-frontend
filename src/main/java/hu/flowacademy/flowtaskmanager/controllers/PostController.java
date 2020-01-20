@@ -39,4 +39,10 @@ public class PostController {
         return ResponseEntity.ok(postDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+        postService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
 }

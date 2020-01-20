@@ -25,6 +25,10 @@ public class PostService {
     private TaskService taskService;
 
 
+    public Post findPostById(Long id) {
+        return postRepository.findById(id).orElse(null);
+    }
+
     public List<Post> findAllPosts() {
         return postRepository.findAll();
     }
@@ -36,6 +40,13 @@ public class PostService {
         post.setUser(userService.findUserById(postDTO.getUserId()));
         post.setTask(taskService.findTaskById(postDTO.getTaskId()));
         postRepository.save(post);
+        taskService.savePostToTask(postDTO.getTaskId(), post.getId());
         return post;
     }
+
+    public void delete(Long id) {
+        postRepository.deleteById(id);
+    }
+
+
 }
