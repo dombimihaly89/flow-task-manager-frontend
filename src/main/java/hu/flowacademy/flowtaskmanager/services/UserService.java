@@ -25,7 +25,7 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User findUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(null);
+        return userRepository.findById(id).orElse(null);
     }
 
     public List<User> findAllUsers() {
@@ -52,6 +52,9 @@ public class UserService {
     public void usernameValidator(User user) {
         if (findUserByName(user.getUsername()) != null) {
             throw new ValidationException("There is a registered user with this username.");
+        }
+        if (user.getUsername().length() < 3 || user.getUsername().length() > 20) {
+            throw new ValidationException("The username needs to be between 3 and 20 characters.");
         }
     }
 
