@@ -60,10 +60,7 @@ public class UserController {
 
     @PutMapping("/update")
     public ResponseEntity<UserResponseDTO> userUpdate(@RequestBody UserRegisterDTO userRegisterDTO) {
-        User userInDb = userService.findUserByName(userRegisterDTO.getUsername());
-        if (userInDb == null) throw new ValidationException("There is no user with this username: " + userRegisterDTO.getUsername());
-        userRegisterDTO.setId(userInDb.getId());
-        User user = userService.saveUser(userRegisterDTO);
+        User user = userService.updateUser(userRegisterDTO);
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.userDTOFromUser(user);
         return ResponseEntity.ok(userResponseDTO);

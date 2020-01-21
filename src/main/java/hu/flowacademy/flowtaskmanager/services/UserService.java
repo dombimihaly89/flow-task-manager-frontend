@@ -43,11 +43,17 @@ public class UserService {
             usernameValidator(user);
             passwordValidator(user);
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        } else {
-            user = findUserById(userRegisterDTO.getId());
-            user.setRole(userRegisterDTO.getRole());
         }
         return userRepository.save(user);
+    }
+
+    public User updateUser(UserRegisterDTO userRegisterDTO) {
+        User userInDb = findUserByName(userRegisterDTO.getUsername()); // kiszedjük a db-ből a név alapján a user-t.
+        if (userInDb == null) throw new ValidationException("There is no user with this username: " + userRegisterDTO.getUsername()); // ha nincs ilyen user -> exception
+        userRegisterDTO.setId(userInDb.getId()); // beállítjuk a bemeneti paraméteren jött DTO-nak az ID-jét az adatbázisból jött user ID-jére.
+        // User user = findUserById(userRegisterDTO.getId());
+        userInDb.setRole(userRegisterDTO.getRole());
+        return userRepository.save(userInDb);
     }
 
     public void usernameValidator(User user) {
