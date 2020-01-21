@@ -5,6 +5,7 @@ import hu.flowacademy.flowtaskmanager.models.Rating;
 import hu.flowacademy.flowtaskmanager.models.Task;
 import hu.flowacademy.flowtaskmanager.models.TaskDTO.TaskDTO;
 import hu.flowacademy.flowtaskmanager.models.User;
+import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserResponseDTO;
 import hu.flowacademy.flowtaskmanager.repositories.RatingRepository;
 import hu.flowacademy.flowtaskmanager.repositories.TaskRepository;
@@ -50,10 +51,15 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task addRating(Long id, Integer rating) {
+    public Task addRating(Long id, Integer rating, Long userId) {
         Task task =  findTaskById(id);
         if (task == null) throw new ValidationException("There is no user with this ID.");
-        Rating newRating = new Rating(rating);
+        User user = userService.findUserById(userId);
+        Rating newRating = new Rating(rating, user);
+        boolean findUserRating = task.getRatings().stream().map(x -> x.getUser().getId()).anyMatch(x -> x == userId);
+        if (findUserRating) {
+            throw new ValidationException("This user already rated this task");
+        }
         ratingRepository.save(newRating);
         task.getRatings().add(newRating);
         return task;

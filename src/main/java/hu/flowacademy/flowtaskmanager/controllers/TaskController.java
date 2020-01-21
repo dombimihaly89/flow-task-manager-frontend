@@ -49,8 +49,8 @@ public class TaskController {
     }
 
     @PostMapping("/rate{id}{rating}")
-    public ResponseEntity<TaskDTO> rateTask(@RequestParam Long id, @RequestParam Integer rating) {
-        Task task = taskService.addRating(id, rating);
+    public ResponseEntity<TaskDTO> rateTask(@RequestParam Long id, @RequestParam Integer rating, @RequestParam Long userId) {
+        Task task = taskService.addRating(id, rating, userId);
         TaskDTO taskDTO = new TaskDTO();
         taskDTO.taskDTOFromTask(task);
         return ResponseEntity.ok(taskDTO);

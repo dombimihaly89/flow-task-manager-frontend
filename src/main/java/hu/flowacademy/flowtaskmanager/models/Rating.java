@@ -1,5 +1,6 @@
 package hu.flowacademy.flowtaskmanager.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,12 @@ public class Rating {
     @Column
     private Integer rating;
 
-    public Rating(Integer rating) {
+    @OneToOne
+    @JsonIgnore
+    private User user;
+
+    public Rating(Integer rating, User user) {
         this.rating = rating;
+        this.user = user;
     }
 }
