@@ -42,6 +42,7 @@ public class UserService {
             user.userFromUserDTO(userRegisterDTO);
             usernameValidator(user);
             passwordValidator(user);
+            roleValiator(user);
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
         return userRepository.save(user);
@@ -53,6 +54,7 @@ public class UserService {
         userRegisterDTO.setId(userInDb.getId()); // beállítjuk a bemeneti paraméteren jött DTO-nak az ID-jét az adatbázisból jött user ID-jére.
         // User user = findUserById(userRegisterDTO.getId());
         userInDb.setRole(userRegisterDTO.getRole());
+        roleValiator(userInDb);
         return userRepository.save(userInDb);
     }
 
@@ -69,6 +71,12 @@ public class UserService {
         if (!user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
             throw new ValidationException("The password needs to have at least 1 lowercase, 1 uppercase, 1 special, 1 digit character," +
                     " and needs to be between 6 and 16 characters.");
+        }
+    }
+
+    public void roleValiator(User user) {
+        if (user.getRole() == null) {
+            throw new ValidationException("There is no role set to the user");
         }
     }
 
