@@ -43,12 +43,10 @@ public class TaskService {
     public Task saveTask(TaskDTO taskDTO) {
         Task task = new Task();
         task.taskFromTaskDTO(taskDTO);
-        if (userService.findUserById(taskDTO.getMentorId()).getRole() == User.Role.MENTOR) {
-            task.setMentor(userService.findUserById(taskDTO.getMentorId()));
-        }
+        mentorValidator(taskDTO);
+        task.setMentor(userService.findUserById(taskDTO.getMentorId()));
         task.setCreatedAt(LocalDateTime.now());
         task.setUsers(taskDTO.getUserIds().stream().map(x -> userService.findUserById(x)).collect(Collectors.toList()));
-        // task.setPosts(taskDTO.getPostIds().stream().map(x -> postService.findPostById(x)).collect(Collectors.toList()));
         return taskRepository.save(task);
     }
 
@@ -78,5 +76,11 @@ public class TaskService {
     public void savePostToTask(Long taskId, Long postId) {
         Task task = findTaskById(taskId);
         task.getPosts().add(postService.findPostById(postId));
+    }
+
+    public void mentorValidator(TaskDTO taskDTO) {
+        if (userService.findUserById(taskDTO.getMentorId()).getRole() != User.Role.MENTOR) {
+            throw new ValidationException("The mentor has to be a user with MENTOR role.");
+        }
     }
 }

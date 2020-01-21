@@ -41,6 +41,7 @@ public class UserService {
         if (userRegisterDTO.getId() == null) {
             user.userFromUserDTO(userRegisterDTO);
             usernameValidator(user);
+            passwordValidator(user);
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         } else {
             user = findUserById(userRegisterDTO.getId());
@@ -55,6 +56,13 @@ public class UserService {
         }
         if (user.getUsername().length() < 3 || user.getUsername().length() > 20) {
             throw new ValidationException("The username needs to be between 3 and 20 characters.");
+        }
+    }
+
+    public void passwordValidator(User user) {
+        if (!user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
+            throw new ValidationException("The password needs to have at least 1 lowercase, 1 uppercase, 1 special, 1 digit character," +
+                    " and needs to be between 6 and 16 characters.");
         }
     }
 
