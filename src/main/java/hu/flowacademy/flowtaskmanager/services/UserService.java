@@ -1,11 +1,11 @@
 package hu.flowacademy.flowtaskmanager.services;
 
 import hu.flowacademy.flowtaskmanager.exceptions.ValidationException;
+import hu.flowacademy.flowtaskmanager.models.Post;
 import hu.flowacademy.flowtaskmanager.models.User;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import hu.flowacademy.flowtaskmanager.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +17,7 @@ import java.util.List;
 public class UserService {
 
     private UserRepository userRepository;
-
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PostService postService;
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElse(null);
@@ -39,7 +38,7 @@ public class UserService {
             usernameValidator(user);
             passwordValidator(user);
             roleValidator(user);
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setPassword(user.getPassword());
         }
         return userRepository.save(user);
     }
@@ -104,4 +103,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void savePostToUser(Long userId, Long id) {
+        User user = findUserById(userId);
+        user.getPosts().add(postService.findPostById(userId));
+    }
 }

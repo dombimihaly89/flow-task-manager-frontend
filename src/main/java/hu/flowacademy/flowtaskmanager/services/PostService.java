@@ -41,6 +41,7 @@ public class PostService {
         post.setTask(taskService.findTaskById(postDTO.getTaskId()));
         postRepository.save(post);
         taskService.savePostToTask(postDTO.getTaskId(), post.getId());
+        userService.savePostToUser(postDTO.getUserId(), post.getId());
         return post;
     }
 
