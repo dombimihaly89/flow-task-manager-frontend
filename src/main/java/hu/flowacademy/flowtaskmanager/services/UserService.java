@@ -3,15 +3,11 @@ package hu.flowacademy.flowtaskmanager.services;
 import hu.flowacademy.flowtaskmanager.exceptions.ValidationException;
 import hu.flowacademy.flowtaskmanager.models.User;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
-import hu.flowacademy.flowtaskmanager.models.userDTO.UserResponseDTO;
 import hu.flowacademy.flowtaskmanager.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -42,7 +38,7 @@ public class UserService {
             user.userFromUserDTO(userRegisterDTO);
             usernameValidator(user);
             passwordValidator(user);
-            roleValiator(user);
+            roleValidator(user);
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
         return userRepository.save(user);
@@ -54,7 +50,7 @@ public class UserService {
         userRegisterDTO.setId(userInDb.getId()); // beállítjuk a bemeneti paraméteren jött DTO-nak az ID-jét az adatbázisból jött user ID-jére.
         // User user = findUserById(userRegisterDTO.getId());
         userInDb.setRole(userRegisterDTO.getRole());
-        roleValiator(userInDb);
+        roleValidator(userInDb);
         return userRepository.save(userInDb);
     }
 
@@ -74,7 +70,7 @@ public class UserService {
         }
     }
 
-    public void roleValiator(User user) {
+    public void roleValidator(User user) {
         if (user.getRole() == null) {
             throw new ValidationException("There is no role set to the user");
         }
