@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { of } from 'rxjs';
-import { Task } from 'src/app/models/task';
-
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService {
+export class PostService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTasks() {
+  getPostById() {
     return this.httpClient.get('http://localhost:8080/api/tasks/findall');
   }
 
-  postTask(data: any) {
-    this.httpClient.post('http://localhost:8080/api/tasks', data).subscribe(
+  postSolution(data: any) {
+    this.httpClient.post('http://localhost:8080/api/posts', data).subscribe(
       responseData => {
         console.log(responseData);
       }
     );
   }
-
 }

@@ -29,4 +29,28 @@ export class Task {
 
     postIds : number
     ){};
+
+    id : number;
+
+    type : string;
+
+    title : string;
+
+    content : string;
+
+    difficulty : string;
+
+    createdAt : number[];
+
+    updatedAt : number[];
+
+    deletedAt : number[];
+
+    ratings : number[];
+
+    mentorName : string;
+
+    userIds : number;
+
+    postIds : number
 }

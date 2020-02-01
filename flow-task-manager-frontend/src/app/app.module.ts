@@ -19,6 +19,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-rooting/app-rooting.module';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { PostComponent } from './post/post.component';
+import { PostSolutionComponent } from './post/post-solution/post-solution.component';
 
 
 @NgModule({
@@ -30,7 +35,9 @@ import { AppRoutingModule } from './app-rooting/app-rooting.module';
     TaskpostComponent,
     LoginComponent,
     NavBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    PostComponent,
+    PostSolutionComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,10 @@ import { AppRoutingModule } from './app-rooting/app-rooting.module';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
