@@ -1,0 +1,26 @@
+
+<div>
+<table *ngFor="let task of tasks">
+  <tr>
+    <th>Type: {{task.type}}</th>
+    <th>Title: {{task.title}}</th>
+    <th>Difficulty: {{task.difficulty}}</th>
+  </tr>
+  <tr>
+    <td colspan="3">{{ task.content }}</td>
+  </tr>
+  <tfoot>
+    <tr>
+      <td >Created at: {{ task.createdAt }}</td>
+      <td *ngIf="task.updatedAt != null">Updated at: {{ task.updatedAt }}</td>
+      <td >Posted by: {{ task.mentorName }}</td>
+      <td >Rating: {{ getRating(task) }}</td>
+    </tr>
+  </tfoot>
+</table>
+
+
+</div>
+<hr>
+
+
