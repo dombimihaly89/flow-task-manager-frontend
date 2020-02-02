@@ -33,6 +33,10 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public List<Post> findPostsByTaskId(Long id) {
+        return postRepository.findByTask(id);
+    }
+
     public Post savePost(PostDTO postDTO) {
         Post post = new Post();
         post.postFromPostDTO(postDTO);
@@ -41,12 +45,14 @@ public class PostService {
         post.setTask(taskService.findTaskById(postDTO.getTaskId()));
         postRepository.save(post);
         taskService.savePostToTask(postDTO.getTaskId(), post.getId());
+        userService.savePostToUser(postDTO.getUserId(), post.getId());
         return post;
     }
 
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
+
 
 
 }

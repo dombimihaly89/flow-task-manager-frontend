@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()" #postSolution="ngForm">
+  <div class="example-container">
+
+    <mat-form-field>
+      <textarea 
+      matInput placeholder="Content"
+      [(ngModel)]="content"
+      name="contentInput"></textarea>
+    </mat-form-field>
+
+<br>
+    <button type="submit" (ngSubmit)="onSubmit()">Submit</button>
+  </div>
+</form>

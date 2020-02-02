@@ -1,0 +1,38 @@
+<form (ngSubmit)="onSubmit()" #taskpost="ngForm">
+  <div class="example-container">
+    <mat-select 
+    placeholder="Type"
+    [(ngModel)]="type"
+    name="typeInput">
+      <mat-option value="JAVA">Java</mat-option>
+      <mat-option value="JAVASCRIPT">Javascript</mat-option>
+      <mat-option value="SPRING">Spring</mat-option>
+      <mat-option value="ANGULAR">Angular</mat-option>
+      <mat-option value="LINUX">Linux</mat-option>
+      <mat-option value="DATABASE">Database</mat-option>
+    </mat-select>
+    <mat-form-field>
+      <input matInput placeholder="Title" 
+      [(ngModel)]="title"
+      name="titleInput"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea 
+      matInput placeholder="Content"
+      [(ngModel)]="content"
+      name="contentInput"></textarea>
+    </mat-form-field>
+
+    <mat-select 
+    placeholder="Difficulty"
+    [(ngModel)]="difficulty"
+    name="difficultyInput">
+      <mat-option value="EASY">Easy</mat-option>
+      <mat-option value="MEDIUM">Medium</mat-option>
+      <mat-option value="HARD">Hard</mat-option>
+    </mat-select>
+<br>
+    <button type="submit" (ngSubmit)="onSubmit()">Submit</button>
+  </div>
+</form>

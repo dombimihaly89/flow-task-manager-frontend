@@ -37,6 +37,7 @@ public class UserResponseDTO {
         this.role = user.getRole();
         if (user.getTasks() == null) this.taskIds = null;
         else this.taskIds = user.getTasks().stream().map(x -> x.getId()).collect(Collectors.toList());
-        this.postIds = null;
+        if (user.getPosts() == null) this.postIds = null;
+        else this.postIds = user.getPosts().stream().map(x -> x.getId()).collect(Collectors.toList());
     }
 }

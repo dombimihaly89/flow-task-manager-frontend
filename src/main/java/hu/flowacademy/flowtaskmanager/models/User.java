@@ -3,9 +3,7 @@ package hu.flowacademy.flowtaskmanager.models;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserLoginDTO;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,7 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "_users")
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,31 +45,6 @@ public class User implements UserDetails {
     @Column
     @OneToMany
     private List<Post> posts;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.role.name()));
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 
     public enum Role {
         MENTOR,
