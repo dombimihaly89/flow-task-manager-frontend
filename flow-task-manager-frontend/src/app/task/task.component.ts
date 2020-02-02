@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TaskService } from 'src/app/services/taskservice/task.service';
 import { Task } from 'src/app/models/task';
+import { getMatInputUnsupportedTypeError } from '@angular/material';
+import { PostService } from '../services/postservice/post.service';
 
 @Component({
   selector: 'app-task',
@@ -10,19 +12,15 @@ import { Task } from 'src/app/models/task';
 export class TaskComponent implements OnInit {
 
   @Input()
-  tasks : any;
+  task : any;
+
+  posts : any;
 
   ratingAverage: number;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private postService: PostService) { }
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(
-      (data) => {
-        this.tasks = data;
-      }
-    )
-    console.log(this.tasks);
   }
 
   getRating(task) {

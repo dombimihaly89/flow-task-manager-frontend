@@ -1,5 +1,5 @@
 <div>
-  <table *ngFor="let task of tasks">
+  <table >
     <tr>
       <th>Type: {{task.type}}</th>
       <th>Title: {{task.title}}</th>
@@ -17,6 +17,7 @@
       </tr>
     </tfoot>
     <button routerLink="/postSolution">Add a solution</button>
-  </table>
+  </table >
+  <app-post-list [task]="task"></app-post-list>
 </div>
 <hr>

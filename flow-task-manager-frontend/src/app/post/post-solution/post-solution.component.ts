@@ -24,7 +24,7 @@ export class PostSolutionComponent implements OnInit {
     const data = {
       content: this.content,
       type: "SOLUTION",
-      taskId: 1,
+      taskId: 2,
       userId: 2
     }
     console.log(data);
