@@ -8,8 +8,8 @@ export class PostService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getPostById() {
-    return this.httpClient.get('http://localhost:8080/api/tasks/findall');
+  getPostById(id : number) {
+    return this.httpClient.get('http://localhost:8080/api/posts/findPostsByTaskId/' + id);
   }
 
   postSolution(data: any) {

@@ -6,6 +6,7 @@ import { TasklistComponent } from '../task/tasklist/tasklist.component';
 import { TaskComponent } from '../task/task.component';
 import { TaskpostComponent } from '../task/taskpost/taskpost.component';
 import { PostSolutionComponent } from '../post/post-solution/post-solution.component';
+import { PostListComponent } from '../post/post-list/post-list.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'postSolution',
     component: PostSolutionComponent
+  },
+  {
+    path: 'postlist',
+    component: PostListComponent
   }
 ];
 

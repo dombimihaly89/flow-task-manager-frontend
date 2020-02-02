@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { PostComponent } from './post/post.component';
 import { PostSolutionComponent } from './post/post-solution/post-solution.component';
+import { PostListComponent } from './post/post-list/post-list.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { PostSolutionComponent } from './post/post-solution/post-solution.compon
     NavBarComponent,
     DashboardComponent,
     PostComponent,
-    PostSolutionComponent
+    PostSolutionComponent,
+    PostListComponent
   ],
   imports: [
     BrowserModule,

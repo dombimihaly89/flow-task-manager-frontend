@@ -17,6 +17,7 @@ export class PostSolutionComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit() {
+    
   }
 
   onSubmit() {
@@ -24,7 +25,7 @@ export class PostSolutionComponent implements OnInit {
       content: this.content,
       type: "SOLUTION",
       taskId: 1,
-      userId: 1
+      userId: 2
     }
     console.log(data);
     this.postService.postSolution(data);
