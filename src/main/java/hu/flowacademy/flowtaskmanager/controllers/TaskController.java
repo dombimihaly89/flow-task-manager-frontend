@@ -3,6 +3,7 @@ package hu.flowacademy.flowtaskmanager.controllers;
 import hu.flowacademy.flowtaskmanager.exceptions.ValidationException;
 import hu.flowacademy.flowtaskmanager.models.Task;
 import hu.flowacademy.flowtaskmanager.models.TaskDTO.TaskDTO;
+import hu.flowacademy.flowtaskmanager.models.TaskDTO.TaskResponseDTO;
 import hu.flowacademy.flowtaskmanager.models.User;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserResponseDTO;
@@ -17,18 +18,19 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/tasks")
+@CrossOrigin("http://localhost:4200")
 public class TaskController {
 
     @Autowired
     private TaskService taskService;
 
     @GetMapping("/findall")
-    public ResponseEntity<List<TaskDTO>> findAllTasks() {
+    public ResponseEntity<List<TaskResponseDTO>> findAllTasks() {
         List<Task> listOfTasks = taskService.findAllTasks();
-        List<TaskDTO> listOfDTOs = listOfTasks.stream().map(t -> {
-            TaskDTO taskDTO = new TaskDTO();
-            taskDTO.taskDTOFromTask(t);
-            return taskDTO;
+        List<TaskResponseDTO> listOfDTOs = listOfTasks.stream().map(t -> {
+            TaskResponseDTO taskResponseDTO = new TaskResponseDTO();
+            taskResponseDTO.taskResponseDTOFromTask(t);
+            return taskResponseDTO;
         }).collect(Collectors.toList());
         return ResponseEntity.ok(listOfDTOs);
     }

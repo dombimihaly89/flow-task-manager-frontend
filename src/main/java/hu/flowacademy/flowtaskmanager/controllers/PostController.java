@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/posts")
+@CrossOrigin("http://localhost:4200")
 public class PostController {
 
     @Autowired
@@ -22,6 +23,18 @@ public class PostController {
     @GetMapping("/findall")
     public ResponseEntity<List<PostDTO>> findAllPosts() {
         List<Post> listOfPosts = postService.findAllPosts();
+
+        List<PostDTO> listOfDTOs = listOfPosts.stream().map(p -> {
+            PostDTO postDTO = new PostDTO();
+            postDTO.postDTOfromPost(p);
+            return postDTO;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(listOfDTOs);
+    }
+
+    @GetMapping("/findPostsByTaskId/{id}")
+    public ResponseEntity<List<PostDTO>> findPostsByTaskId(@PathVariable Long id) {
+        List<Post> listOfPosts = postService.findPostsByTaskId(id);
 
         List<PostDTO> listOfDTOs = listOfPosts.stream().map(p -> {
             PostDTO postDTO = new PostDTO();

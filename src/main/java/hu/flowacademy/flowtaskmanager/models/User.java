@@ -3,6 +3,7 @@ package hu.flowacademy.flowtaskmanager.models;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserLoginDTO;
 import hu.flowacademy.flowtaskmanager.models.userDTO.UserRegisterDTO;
 import lombok.Data;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.time.LocalDate;
