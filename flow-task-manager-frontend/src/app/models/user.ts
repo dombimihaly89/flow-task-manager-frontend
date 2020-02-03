@@ -13,11 +13,12 @@ export class User {
 
     lastName : string;
 
-    dateOfBirth = [];
+    dateOfBirth : string;
 
     role : string;
 
     tasks : Task[];
 
     posts : Post[];
+
 }

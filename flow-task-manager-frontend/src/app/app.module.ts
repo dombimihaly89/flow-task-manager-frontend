@@ -25,6 +25,8 @@ import { FormsModule } from '@angular/forms';
 import { PostComponent } from './post/post.component';
 import { PostSolutionComponent } from './post/post-solution/post-solution.component';
 import { PostListComponent } from './post/post-list/post-list.component';
+import { UserComponent } from './user/user.component';
+import { UserregistrationComponent } from './user/userregistration/userregistration.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { PostListComponent } from './post/post-list/post-list.component';
     DashboardComponent,
     PostComponent,
     PostSolutionComponent,
-    PostListComponent
+    PostListComponent,
+    UserComponent,
+    UserregistrationComponent
   ],
   imports: [
     BrowserModule,
