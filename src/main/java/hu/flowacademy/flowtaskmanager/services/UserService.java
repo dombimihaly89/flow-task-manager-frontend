@@ -36,7 +36,7 @@ public class UserService {
         if (userRegisterDTO.getId() == null) {
             user.userFromUserDTO(userRegisterDTO);
             usernameValidator(user);
-            passwordValidator(user);
+            //passwordValidator(user);
             roleValidator(user);
             user.setPassword(user.getPassword());
         }
@@ -47,7 +47,7 @@ public class UserService {
         User userInDb = findUserByName(userRegisterDTO.getUsername()); // kiszedjük a db-ből a név alapján a user-t.
         if (userInDb == null) throw new ValidationException("There is no user with this username: " + userRegisterDTO.getUsername()); // ha nincs ilyen user -> exception
         userRegisterDTO.setId(userInDb.getId()); // beállítjuk a bemeneti paraméteren jött DTO-nak az ID-jét az adatbázisból jött user ID-jére.
-        // User user = findUserById(userRegisterDTO.getId());
+        User user = findUserById(userRegisterDTO.getId());
         userInDb.setRole(userRegisterDTO.getRole());
         roleValidator(userInDb);
         return userRepository.save(userInDb);
@@ -63,7 +63,7 @@ public class UserService {
     }
 
     public void passwordValidator(User user) {
-        if (!user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
+        if (!user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")) {
             throw new ValidationException("The password needs to have at least 1 lowercase, 1 uppercase, 1 special, 1 digit character," +
                     " and needs to be between 6 and 16 characters.");
         }
@@ -106,5 +106,16 @@ public class UserService {
     public void savePostToUser(Long userId, Long id) {
         User user = findUserById(userId);
         user.getPosts().add(postService.findPostById(userId));
+    }
+
+    public boolean validateUser(String username, String password) {
+        User user = findUserByName(username);
+        System.out.println(user.getPassword());
+        System.out.println(password);
+        if (user.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

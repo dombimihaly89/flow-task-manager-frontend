@@ -51,6 +51,12 @@ public class UserController {
         return ResponseEntity.ok(userResponseDTO);
     }
 
+    @GetMapping("/validate/{username}/{password}")
+    public ResponseEntity<Boolean> validateUser(@PathVariable String username, @PathVariable String password) {
+        Boolean isValid = userService.validateUser(username, password);
+        return ResponseEntity.ok(isValid);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<UserResponseDTO> userRegister(@RequestBody UserRegisterDTO userRegisterDTO) {
         User user = userService.saveUser(userRegisterDTO);

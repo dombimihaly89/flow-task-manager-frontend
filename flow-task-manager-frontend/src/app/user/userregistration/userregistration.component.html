@@ -1,0 +1,50 @@
+<form (ngSubmit)="onSubmit()" #userpost="ngForm">
+  <div class="example-container">
+    <mat-select 
+    placeholder="Role"
+    [(ngModel)]="role"
+    name="roleInput">
+      <mat-option value="MENTOR">Mentor</mat-option>
+      <mat-option value="STUDENT">Student</mat-option>
+    </mat-select>
+<br>
+    <mat-form-field>
+      <textarea 
+      matInput placeholder="Username"
+      [(ngModel)]="userName"
+      name="userNameInput"
+      required></textarea>
+    </mat-form-field>
+<br>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" 
+      [(ngModel)]="password"
+      name="passwordInput"
+      required/>
+    </mat-form-field>
+<br>
+    <mat-form-field>
+      <input matInput placeholder="Firstname" 
+      [(ngModel)]="firstName"
+      name="firstNameInput"
+      required/>
+    </mat-form-field>
+<br>
+    <mat-form-field>
+      <input matInput placeholder="Lastname" 
+      [(ngModel)]="lastName"
+      name="lastNameInput"
+      required/>
+    </mat-form-field>
+<br>
+    <mat-form-field>
+      <input matInput placeholder="Date of birth" 
+      [(ngModel)]="dateOfBirth"
+      name="dateOfBirthInput"
+      required/>
+    </mat-form-field>
+
+<br>
+    <button [disabled]="userpost.invalid" type="submit" (ngSubmit)="onSubmit()">Submit</button>
+  </div>
+</form>
