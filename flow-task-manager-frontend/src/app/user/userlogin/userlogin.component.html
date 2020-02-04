@@ -1,0 +1,22 @@
+<form (ngSubmit)="onSubmit()" #taskpost="ngForm">
+  <div class="example-container">
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Username" 
+      [(ngModel)]="username"
+      name="usernameInput"
+      required/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" 
+      [(ngModel)]="password"
+      name="passwordInput"
+      required/>
+    </mat-form-field>
+    <br>
+
+    <button type="submit" [disabled]="taskpost.isValid" (ngSubmit)="onSubmit()">Login</button>
+  </div>
+</form>
+<p *ngIf="isValid === true">Successful login</p>
