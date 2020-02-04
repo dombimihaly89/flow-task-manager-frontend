@@ -9,8 +9,22 @@ import { PostSolutionComponent } from '../post/post-solution/post-solution.compo
 import { PostListComponent } from '../post/post-list/post-list.component';
 import { UserregistrationComponent } from '../user/userregistration/userregistration.component';
 import { UserloginComponent } from '../user/userlogin/userlogin.component';
+import { AuthComponent } from '../auth/auth.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
+  { 
+    path: 'login', 
+    component: AuthComponent 
+  },
+  { 
+    path: 'home', 
+    component: NavBarComponent, 
+    canActivate: [AuthGuard] },
+  { 
+    path: '**', 
+    redirectTo: '/login' 
+  },
   {
     path: 'tasklist',
     component: TasklistComponent

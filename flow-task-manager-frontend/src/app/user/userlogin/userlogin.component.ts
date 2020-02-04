@@ -14,7 +14,8 @@ export class UserloginComponent implements OnInit {
   username: string;
   password: string;
 
-  isValid: any;
+
+  isValid: any; // behaviour subject
 
   user: any;
 

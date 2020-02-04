@@ -20,7 +20,7 @@ import { MatListModule } from '@angular/material/list';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-rooting/app-rooting.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material';
+import { MatSelectModule, MatProgressSpinnerModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { PostComponent } from './post/post.component';
 import { PostSolutionComponent } from './post/post-solution/post-solution.component';
@@ -28,6 +28,7 @@ import { PostListComponent } from './post/post-list/post-list.component';
 import { UserComponent } from './user/user.component';
 import { UserregistrationComponent } from './user/userregistration/userregistration.component';
 import { UserloginComponent } from './user/userlogin/userlogin.component';
+import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { UserloginComponent } from './user/userlogin/userlogin.component';
     PostListComponent,
     UserComponent,
     UserregistrationComponent,
-    UserloginComponent
+    UserloginComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,9 @@ import { UserloginComponent } from './user/userlogin/userlogin.component';
     AppRoutingModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
