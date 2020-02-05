@@ -28,7 +28,7 @@ import { PostListComponent } from './post/post-list/post-list.component';
 import { UserComponent } from './user/user.component';
 import { UserregistrationComponent } from './user/userregistration/userregistration.component';
 import { UserloginComponent } from './user/userlogin/userlogin.component';
-import { AuthComponent } from './auth/auth.component';
+import { DataService } from './services/data.service';
 
 
 @NgModule({
@@ -46,8 +46,7 @@ import { AuthComponent } from './auth/auth.component';
     PostListComponent,
     UserComponent,
     UserregistrationComponent,
-    UserloginComponent,
-    AuthComponent
+    UserloginComponent
   ],
   imports: [
     BrowserModule,
@@ -65,9 +64,8 @@ import { AuthComponent } from './auth/auth.component';
     MatSelectModule,
     FormsModule,
     MatProgressSpinnerModule
-
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

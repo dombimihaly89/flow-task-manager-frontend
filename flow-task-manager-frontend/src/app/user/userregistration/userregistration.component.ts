@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/userservice/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-userregistration',
@@ -10,8 +11,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserregistrationComponent implements OnInit {
 
-  constructor(private userService: UserService, private router : Router, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private router : Router, private route: ActivatedRoute, private dataService: DataService) { }
 
+  id: number
   role: string;
   userName: string;
   password: string;
@@ -33,6 +35,16 @@ export class UserregistrationComponent implements OnInit {
     }
     this.userService.createUser(data);
     this.navigateToUserLogin();
+    this.dataService.dataSource.next(
+      {
+        username: this.userName,
+        password: this.password
+      }
+    )
+    this.dataService.dataSource.subscribe(data => {
+      console.log('next', data)
+
+    })
   }
 
   navigateToUserLogin() {

@@ -16,7 +16,16 @@
         <td >Rating: {{ getRating(task) }}</td>
       </tr>
     </tfoot>
-    <button routerLink="/postSolution">Add a solution</button>
+    <button (click)="navigate('postSolution', task.id)">Add a solution</button>
+    Rating:
+    <select [(ngModel)] = "rating" >
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <button type="submit" [disabled]="ratingButton" (click)="rate()">Rate</button>
   </table >
   <app-post-list [task]="task"></app-post-list>
 </div>

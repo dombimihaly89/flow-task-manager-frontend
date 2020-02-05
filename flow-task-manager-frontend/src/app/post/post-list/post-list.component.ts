@@ -18,6 +18,7 @@ export class PostListComponent implements OnInit {
   ngOnInit() {
     this.postService.getPostById(this.task.id).subscribe(
       (data) => {
+        console.log('POST', data)
         this.posts = data;
       }
     )

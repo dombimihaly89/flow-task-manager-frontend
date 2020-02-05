@@ -3,6 +3,7 @@ import { TaskService } from 'src/app/services/taskservice/task.service';
 import { Task } from 'src/app/models/task';
 import { getMatInputUnsupportedTypeError } from '@angular/material';
 import { PostService } from '../services/postservice/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -18,7 +19,10 @@ export class TaskComponent implements OnInit {
 
   ratingAverage: number;
 
-  constructor(private taskService: TaskService, private postService: PostService) { }
+  rating: number;
+  ratingButton: boolean = false;
+
+  constructor(private taskService: TaskService, private postService: PostService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -31,6 +35,20 @@ export class TaskComponent implements OnInit {
     }
     this.ratingAverage = sum / list.length;
     return this.ratingAverage;
+  }
+
+  public navigate(url: string, taskId: number) {
+    this.router.navigate([url], {queryParams: {taskId: taskId}});
+  }
+
+  public rate() {
+    this.ratingButton = true;
+    console.log('UserId: ', this.task.userId);
+    this.taskService.addRating({
+      id: this.task.id,
+      rating: this.rating,
+      userId: this.task.userId
+    })
   }
 
 }

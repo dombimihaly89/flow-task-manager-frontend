@@ -23,4 +23,13 @@ export class TaskService {
     );
   }
 
+  addRating(data: any) {
+    console.log('data: ', data)
+    this.httpClient.post(`http://localhost:8080/api/tasks/rate?id=${data.id}&rating=${data.rating}&userId=${data.userId}`, null).subscribe(
+      responseData => {
+        console.log(responseData);
+      }
+    );
+  }
+
 }

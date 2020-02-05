@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from 'src/app/services/postservice/post.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post-solution',
@@ -14,17 +15,23 @@ export class PostSolutionComponent implements OnInit {
 
   content: string;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private activatedRoute: ActivatedRoute) { }
+
+  taskId: number = 0;
 
   ngOnInit() {
-    
+    this.activatedRoute.queryParams.subscribe(params => {
+      console.log('param1', params.taskId);
+      console.log('param2', params);
+      this.taskId = params.taskId;
+    });
   }
 
   onSubmit() {
     const data = {
       content: this.content,
       type: "SOLUTION",
-      taskId: 2,
+      taskId: this.taskId,
       userId: 1
     }
     console.log(data);
