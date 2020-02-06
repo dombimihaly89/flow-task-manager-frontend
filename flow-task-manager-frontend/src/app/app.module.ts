@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { UserComponent } from './user/user.component';
 import { UserregistrationComponent } from './user/userregistration/userregistration.component';
 import { UserloginComponent } from './user/userlogin/userlogin.component';
 import { DataService } from './services/data.service';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { DataService } from './services/data.service';
     FormsModule,
     MatProgressSpinnerModule
   ],
-  providers: [DataService],
+ // providers: [DataService],
+ providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,32 +9,43 @@ import { PostSolutionComponent } from '../post/post-solution/post-solution.compo
 import { PostListComponent } from '../post/post-list/post-list.component';
 import { UserregistrationComponent } from '../user/userregistration/userregistration.component';
 import { UserloginComponent } from '../user/userlogin/userlogin.component';
+import { LoginComponent } from '../login/login.component';
+import { AuthGuard } from '../auth/auth-guard';
 
 const routes: Routes = [
   {
     path: 'tasklist',
-    component: TasklistComponent
+    component: TasklistComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'taskpost',
-    component: TaskpostComponent
+    component: TaskpostComponent,
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'postSolution',
-    component: PostSolutionComponent
+    component: PostSolutionComponent,
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'postlist',
-    component: PostListComponent
+    component: PostListComponent,
+    canActivate: [AuthGuard]
+
   },
   {
-    path: 'userregistration',
+    path: 'register',
     component: UserregistrationComponent
   },
   {
-    path: 'userlogin',
-    component: UserloginComponent
-  }
+    path: 'login',
+    //component: UserloginComponent
+    component: LoginComponent
+  },
+  { path: '**', redirectTo: 'tasklist' }
 ];
 
 @NgModule({

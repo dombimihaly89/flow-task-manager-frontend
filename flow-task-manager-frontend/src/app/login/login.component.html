@@ -12,7 +12,7 @@ Date of birth: <input type="text">
 Role: <input type="text">
 <br>
 <button mat-flat-button>REGISTER</button> -->
-
+<!-- 
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Username" value="">
@@ -34,12 +34,51 @@ Role: <input type="text">
   </mat-form-field>
   <br>
 </form>
-<!-- <mat-select>
+ <mat-select>
   <mat-option [value]="MENTOR">
     Mentor
   </mat-option>
   <mat-option [value]="STUDENT">
     Student
   </mat-option>
-</mat-select> -->
+</mat-select> 
 <button mat-flat-button>REGISTER</button>
+ -->
+
+ <div class="main-div">
+  <h2>Login Page</h2>
+  <form class="example-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <mat-form-field class="example-full-width">
+      <input
+        id="username"
+        name="username"
+        ngModel
+        required
+        matInput
+        placeholder="username"
+        type="text">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input
+        id="password"
+        name="password"
+        ngModel
+        required  
+        matInput
+        placeholder="password"
+        type="password">
+    </mat-form-field>
+    <button
+      mat-raised-button color="accent"
+      type="submit"
+      [disabled]="!authForm.valid"
+      >Login</button>
+      <br>
+      <button class="button"
+      mat-raised-button color="accent"
+      (click)="backHome()"
+      >HomePage
+</button>
+  </form>
+</div>
+
