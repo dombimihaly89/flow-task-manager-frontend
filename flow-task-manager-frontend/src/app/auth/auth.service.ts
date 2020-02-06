@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { AuthToken } from './authtoken.model';
 import { Router } from '@angular/router';
+import { UserService } from '../services/userservice/user.service';
 
 export interface AuthResponseData {
   access_token: string;
@@ -17,15 +18,20 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   token = new BehaviorSubject<AuthToken>(null);
+  username: string;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  getUserName() {
+    return this.username;
+  }
+
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
 
   login(username: string, password: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Basic ' + btoa('fooClientIdPassword:secret')
-    });
-
+    });   
+    this.username = username;
     const body = new HttpParams()
       .set('grant_type', 'password')
       .set('username', username)

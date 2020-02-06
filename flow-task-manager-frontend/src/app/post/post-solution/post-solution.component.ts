@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from 'src/app/services/postservice/post.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/userservice/user.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-post-solution',
@@ -14,8 +17,9 @@ export class PostSolutionComponent implements OnInit {
   taskPostForm: NgForm;
 
   content: string;
+  user: any;
 
-  constructor(private postService: PostService, private activatedRoute: ActivatedRoute) { }
+  constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private userService: UserService, private authService: AuthService) { }
 
   taskId: number = 0;
 
@@ -25,6 +29,13 @@ export class PostSolutionComponent implements OnInit {
       console.log('param2', params);
       this.taskId = params.taskId;
     });
+
+    this.userService.findUserByUsername(this.authService.getUserName()).subscribe(
+      (data) => {
+        this.user = data;
+      }
+    )
+
   }
 
   onSubmit() {
@@ -32,7 +43,7 @@ export class PostSolutionComponent implements OnInit {
       content: this.content,
       type: "SOLUTION",
       taskId: this.taskId,
-      userId: 1
+      userId: this.user.id
     }
     console.log(data);
     this.postService.postSolution(data);

@@ -4,6 +4,8 @@ import { Task } from 'src/app/models/task';
 import { getMatInputUnsupportedTypeError } from '@angular/material';
 import { PostService } from '../services/postservice/post.service';
 import { Router } from '@angular/router';
+import { UserService } from '../services/userservice/user.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-task',
@@ -14,6 +16,8 @@ export class TaskComponent implements OnInit {
 
   @Input()
   task : any;
+  mentor: any;
+  mentorName: string = "";
 
   posts : any;
 
@@ -22,9 +26,15 @@ export class TaskComponent implements OnInit {
   rating: number;
   ratingButton: boolean = false;
 
-  constructor(private taskService: TaskService, private postService: PostService, private router: Router) { }
+  constructor(private taskService: TaskService, private postService: PostService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.findUserById(this.task.mentorId).subscribe(
+      (data) => {
+        this.mentor = data;
+        this.mentorName = data.username;
+      }
+    )
   }
 
   getRating(task) {

@@ -12,7 +12,7 @@
       <tr>
         <td >Created at: {{ task.createdAt }}</td>
         <td *ngIf="task.updatedAt != null">Updated at: {{ task.updatedAt }}</td>
-        <td >Posted by: {{ task.mentorName }}</td>
+        <td >Posted by: {{ mentorName }}</td>
         <td >Rating: {{ getRating(task) }}</td>
       </tr>
     </tfoot>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,12 @@ export class UserService {
     return this.httpClient.get(`http://localhost:8080/api/users/validate/${username}/${password}`)
   }
 
-  
+  findUserByUsername(username: string) {
+    return this.httpClient.get(`http://localhost:8080/api/users/${username}/names`);
+  }
+
+  findUserById(id: number): Observable<User> {
+    return this.httpClient.get<User>(`http://localhost:8080/api/users/${id}/ids`);
+  }
   
 }

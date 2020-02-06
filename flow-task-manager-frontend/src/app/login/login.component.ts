@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
+import { UserService } from '../services/userservice/user.service';
+import { User } from '../models/user';
 
 /* @Component({
   selector: 'app-login',
@@ -27,7 +29,9 @@ export class LoginComponent implements OnInit {
 })
 export class LoginComponent implements OnInit {
   
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) {}
+
+  user: any;
 
   onSubmit(form: NgForm) {
     const username = form.value.username;
@@ -40,7 +44,6 @@ export class LoginComponent implements OnInit {
 
     authObservable.subscribe(resData => {
       console.log(resData);
-      // userservice hívás
       this.router.navigate(['/taskpost']);
     }, error => {
       console.log(error);
