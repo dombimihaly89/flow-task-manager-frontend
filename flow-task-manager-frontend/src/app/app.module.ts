@@ -28,7 +28,6 @@ import { PostListComponent } from './post/post-list/post-list.component';
 import { UserComponent } from './user/user.component';
 import { UserregistrationComponent } from './user/userregistration/userregistration.component';
 import { UserloginComponent } from './user/userlogin/userlogin.component';
-import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
@@ -47,7 +46,6 @@ import { AuthComponent } from './auth/auth.component';
     UserComponent,
     UserregistrationComponent,
     UserloginComponent,
-    AuthComponent
   ],
   imports: [
     BrowserModule,
