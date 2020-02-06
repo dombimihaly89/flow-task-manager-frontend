@@ -1,0 +1,12 @@
+table {
+  margin-bottom: 20px;
+  width:500px;
+  height:150px;
+  background-color: rgb(215, 255, 142);
+  top:50%;
+  left:40%;
+} 
+
+table, th, td {
+  border: 1px solid black;
+}
