@@ -53,13 +53,23 @@
   <h2>Registration</h2>
   <form class="example-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
     <mat-form-field class="example-full-width">
+    <mat-select 
+    [(ngModel)]="role"
+    placeholder="Role"
+    name="role">
+      <mat-option value="MENTOR">Mentor</mat-option>
+      <mat-option value="STUDENT">Student</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+    <mat-form-field class="example-full-width">
       <input
         id="firstName"
         name="firstName"
         ngModel
         required
         matInput
-        placeholder="firstName"
+        placeholder="Firstname"
         type="text">
     </mat-form-field>
     <br>
@@ -70,7 +80,7 @@
         ngModel
         required
         matInput
-        placeholder="lastName"
+        placeholder="Lastname"
         type="text">
     </mat-form-field>
     <br>
@@ -81,7 +91,7 @@
         ngModel
         required
         matInput
-        placeholder="username"
+        placeholder="Username"
         type="text">
     </mat-form-field>
     <br>
@@ -92,29 +102,18 @@
         ngModel
         required  
         matInput
-        placeholder="password"
+        placeholder="Password"
         type="password">
     </mat-form-field>
     <br>
     <mat-form-field class="example-full-width">
       <input
-        id="email"
-        name="email"
+        id="dateOfBirth"
+        name="dateOfBirth"
         ngModel
         required
         matInput
-        placeholder="email"
-        type="email">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <input
-        id="birthDate"
-        name="birthDate"
-        ngModel
-        required
-        matInput
-        placeholder="birthDate"
+        placeholder="BirthDate"
         type="date">
     </mat-form-field>
     <br>
@@ -124,15 +123,8 @@
       [disabled]="!authForm.valid"
       >Sign up</button>
       <br>
-      <mat-select 
-    placeholder="Role"
-    [(ngModel)]="role"
-    name="roleInput">
-      <mat-option value="MENTOR">Mentor</mat-option>
-      <mat-option value="STUDENT">Student</mat-option>
-    </mat-select>
       <button class="button"
-  mat-raised-button color="primary"
+  mat-raised-button color="accent"
   (click)="backHome()"
   >HomePage</button>
   </form>

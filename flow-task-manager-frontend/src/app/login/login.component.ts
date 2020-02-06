@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
 
     authObservable.subscribe(resData => {
       console.log(resData);
+      // userservice hívás
       this.router.navigate(['/taskpost']);
     }, error => {
       console.log(error);

@@ -16,19 +16,21 @@ export class UserregistrationComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  role: string;
+
   onSubmit(form: NgForm) {
     const firstName = form.value.firstName;
     const lastName = form.value.lastName;
     const username = form.value.username;
     const password = form.value.password;
-    const email = form.value.email;
-    const birthDate = form.value.birthDate;
-    console.log(firstName, lastName, username, email, birthDate);
+    const role = this.role;
+    const dateOfBirth = form.value.dateOfBirth;
+    console.log(firstName, lastName, username, role, dateOfBirth);
 
     let authObservable: Observable<any>;
 
     // tslint:disable-next-line: max-line-length
-    authObservable = this.authService.register(firstName, lastName, username, password, email, birthDate);
+    authObservable = this.authService.register(firstName, lastName, username, password, dateOfBirth, role);
 
     authObservable.subscribe(resData => {
       console.log(resData);

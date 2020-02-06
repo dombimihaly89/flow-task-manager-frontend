@@ -39,7 +39,7 @@ export class AuthService {
     );
   }
 
-  register(firstName: string, lastName: string, username: string, password: string, email: string, birthDate: string) {
+  register(firstName: string, lastName: string, username: string, password: string, dateOfBirth: Date, role: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -48,8 +48,8 @@ export class AuthService {
       'lastName': lastName,
       'username': username,
       'password': password,
-      'email': email,
-      'birthDate': birthDate,
+      'dateOfBirth': dateOfBirth,
+      'role': role
     }
     return this.http.post(
       'http://localhost:8080/api/users/register', body, {headers: headers}
