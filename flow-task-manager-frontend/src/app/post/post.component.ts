@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userService.findUserByUsername(this.authService.getUserName()).subscribe(
+    this.postService.findUserByPostId(this.post.id).subscribe(
       (data) => {
         this.user = data;
         this.username = this.user.username;

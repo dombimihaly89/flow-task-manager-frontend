@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PostService {
+  
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,4 +20,8 @@ export class PostService {
       }
     );
   }
+
+  findUserByPostId(id: number) {
+    return this.httpClient.get('http://localhost:8080/api/posts/findUserByPostId/' + id);
+    }
 }
