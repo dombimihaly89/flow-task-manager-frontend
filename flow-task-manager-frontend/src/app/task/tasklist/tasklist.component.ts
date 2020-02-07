@@ -18,13 +18,13 @@ export class TasklistComponent implements OnInit {
       this.tasks = data;
       console.log('tasks changed-----------------------------------------', data)
     })
-    /* this.taskService.getTasks().subscribe(
+    this.taskService.getTasks().subscribe(
       (data) => {
         this.tasks = data;
       }
-    ) */
+    )
     this.taskService.fetchTasks();
-    console.log(this.tasks);
+    /* console.log(this.tasks); */
   }
 
 }

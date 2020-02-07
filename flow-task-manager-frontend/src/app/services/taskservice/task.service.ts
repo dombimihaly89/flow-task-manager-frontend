@@ -23,11 +23,7 @@ export class TaskService {
   }
 
   postTask(data: any) {
-    this.httpClient.post('http://localhost:8080/api/tasks', data).subscribe(
-      responseData => {
-        console.log(responseData);
-      }
-    );
+    return this.httpClient.post('http://localhost:8080/api/tasks', data);
   }
 
   addRating(data: any) {

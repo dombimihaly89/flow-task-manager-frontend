@@ -43,12 +43,14 @@ export class TaskpostComponent implements OnInit {
       mentorId: this.user.id,
       // userIds: [1]
     }
-    this.taskService.postTask(data);
-    this.backHome();
+    this.taskService.postTask(data).subscribe(() => 
+    {
+      this.backHome();
+    });
   } 
 
   backHome() {
-    this.router.navigate(['tasklist']);
+    this.router.navigate(['/tasklist']);
   }
 
 }
