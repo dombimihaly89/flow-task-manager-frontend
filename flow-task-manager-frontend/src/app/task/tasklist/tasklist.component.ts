@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { TaskService } from 'src/app/services/taskservice/task.service';
 import { Task } from 'src/app/models/task';
 
@@ -14,11 +14,16 @@ export class TasklistComponent implements OnInit {
   tasks : any;
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(
+    this.taskService.tasksSub.subscribe(data => {
+      this.tasks = data;
+      console.log('tasks changed-----------------------------------------', data)
+    })
+    /* this.taskService.getTasks().subscribe(
       (data) => {
         this.tasks = data;
       }
-    )
+    ) */
+    this.taskService.fetchTasks();
     console.log(this.tasks);
   }
 

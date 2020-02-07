@@ -76,4 +76,10 @@ export class TaskComponent implements OnInit {
     return str.substr(0,index) + chr + str.substr(index+1);
 }
 
+  deleteTask(taskId: number) {
+    this.taskService.deleteTask(taskId).subscribe( data => {
+      this.taskService.fetchTasks();
+    });
+  }
+
 }

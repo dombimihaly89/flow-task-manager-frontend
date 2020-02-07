@@ -4,6 +4,7 @@ import { Task } from 'src/app/models/task';
 import { TaskService } from 'src/app/services/taskservice/task.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserService } from 'src/app/services/userservice/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-taskpost',
@@ -21,7 +22,7 @@ export class TaskpostComponent implements OnInit {
   content: string;
   difficulty: string;
 
-  constructor(private taskService: TaskService, private authService: AuthService, private userService: UserService) { }
+  constructor(private taskService: TaskService, private authService: AuthService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.userService.findUserByUsername(this.authService.getUserName()).subscribe(
@@ -43,6 +44,11 @@ export class TaskpostComponent implements OnInit {
       // userIds: [1]
     }
     this.taskService.postTask(data);
+    this.backHome();
   } 
+
+  backHome() {
+    this.router.navigate(['tasklist']);
+  }
 
 }

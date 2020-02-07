@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { of } from 'rxjs';
+import { of, BehaviorSubject } from 'rxjs';
 import { Task } from 'src/app/models/task';
 
 
@@ -8,8 +8,15 @@ import { Task } from 'src/app/models/task';
   providedIn: 'root'
 })
 export class TaskService {
+  tasksSub = new BehaviorSubject<any>(null);
 
   constructor(private httpClient: HttpClient) { }
+
+  fetchTasks() {
+    this.httpClient.get('http://localhost:8080/api/tasks/findall').subscribe(data => {
+      this.tasksSub.next(data);
+    })
+  }
 
   getTasks() {
     return this.httpClient.get('http://localhost:8080/api/tasks/findall');
@@ -30,6 +37,10 @@ export class TaskService {
         console.log(responseData);
       }
     );
+  }
+
+  deleteTask(id: number) {
+    return this.httpClient.delete(`http://localhost:8080/api/tasks/${id}`);
   }
 
 }

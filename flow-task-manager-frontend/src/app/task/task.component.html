@@ -15,7 +15,7 @@
         <td >Created at: {{ date }}</td>
         <td *ngIf="task.updatedAt != null">Updated at: {{ task.updatedAt }}</td>
         <td >Posted by: {{ mentorName }}</td>
-       <!-- <td >Rating: {{ getRating(task) }}</td> -->
+        <td ><button mat-flat-button color="warn" (click)="deleteTask(task.id)">Delete</button></td>
       </tr>
     </tfoot>
     <button mat-flat-button color="primary" (click)="navigate('postSolution', task.id)">Add a solution</button>
