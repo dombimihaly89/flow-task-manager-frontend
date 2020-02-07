@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from 'src/app/services/postservice/post.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/userservice/user.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/models/user';
@@ -19,7 +19,7 @@ export class PostSolutionComponent implements OnInit {
   content: string;
   user: any;
 
-  constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private userService: UserService, private authService: AuthService) { }
+  constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private userService: UserService, private authService: AuthService, private router: Router) { }
 
   taskId: number = 0;
 
@@ -47,5 +47,10 @@ export class PostSolutionComponent implements OnInit {
     }
     console.log(data);
     this.postService.postSolution(data);
+    this.backHome();
   } 
+
+  backHome() {
+    this.router.navigate(['tasklist']);
+  }
 }

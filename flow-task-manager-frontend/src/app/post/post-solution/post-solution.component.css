@@ -3,6 +3,32 @@
   flex-direction: column;
 }
 
+h2 {
+  text-align: center;
+}
+
 .example-container > * {
   width: 100%;
+}
+
+.exampleform {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  background-color: aliceblue;
+  opacity:0.6;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.container {
+  min-height: 390px;
+}
+
+.outerdiv {
+  background-image: url("https://www.flowacademy.hu/img/Flow%20Academy%20logo_colorful.jpg");
+  padding: 1.5cm;
 }
