@@ -18,6 +18,7 @@ export class TaskComponent implements OnInit {
   task : any;
   mentor: any;
   mentorName: string = "";
+  date: string = "";
 
   posts : any;
 
@@ -35,6 +36,7 @@ export class TaskComponent implements OnInit {
         this.mentorName = data.username;
       }
     )
+    this.dateFormatter();
   }
 
   getRating(task) {
@@ -60,5 +62,18 @@ export class TaskComponent implements OnInit {
       userId: this.task.userId
     })
   }
+
+  dateFormatter() {
+    this.date = this.task.createdAt.toString()
+    console.log('Createddddddddddddddd ', this.date);
+    this.date = this.task.createdAt[0] + "." + this.task.createdAt[1] + "." + this.task.createdAt[2] + " " +
+    this.task.createdAt[3] + ":" + this.task.createdAt[4] + ":" + this.task.createdAt[5];
+    console.log(this.date);
+  }
+
+  setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substr(0,index) + chr + str.substr(index+1);
+}
 
 }

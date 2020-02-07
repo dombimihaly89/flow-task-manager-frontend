@@ -12,14 +12,13 @@
     </tr>
     <tfoot>
       <tr>
-        <td >Created at: {{ task.createdAt }}</td>
+        <td >Created at: {{ date }}</td>
         <td *ngIf="task.updatedAt != null">Updated at: {{ task.updatedAt }}</td>
         <td >Posted by: {{ mentorName }}</td>
-        <td >Rating: {{ getRating(task) }}</td>
+       <!-- <td >Rating: {{ getRating(task) }}</td> -->
       </tr>
     </tfoot>
     <button mat-flat-button color="primary" (click)="navigate('postSolution', task.id)">Add a solution</button>
-    Rating:
   <!--  <select [(ngModel)] = "rating" >
       <option value="1">1</option>
       <option value="2">2</option>

@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
 
   @Input('poster')
   post: any;
+  date: string = "";
 
   user: any;
   username: string;
@@ -28,6 +29,20 @@ export class PostComponent implements OnInit {
         this.username = this.user.username;
       }
     )
+    this.dateFormatter();
   }
+
+  dateFormatter() {
+    this.date = this.post.createdAt.toString()
+    console.log('Createddddddddddddddd ', this.date);
+    this.date = this.post.createdAt[0] + "." + this.post.createdAt[1] + "." + this.post.createdAt[2] + " " +
+    this.post.createdAt[3] + ":" + this.post.createdAt[4] + ":" + this.post.createdAt[5];
+    console.log(this.date);
+  }
+
+  setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substr(0,index) + chr + str.substr(index+1);
+}
 
 }
