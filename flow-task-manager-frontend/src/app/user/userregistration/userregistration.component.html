@@ -50,8 +50,9 @@
 </form> -->
 
 <div class="main-div">
-  <h2>Registration</h2>
   <form class="example-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <div class="example-container">
+    <h2>Registration</h2>
     <mat-form-field class="example-full-width">
     <mat-select 
     [(ngModel)]="role"
@@ -127,5 +128,6 @@
   mat-raised-button color="primary"
   (click)="backHome()"
   >HomePage</button>
+  </div>
   </form>
 </div>

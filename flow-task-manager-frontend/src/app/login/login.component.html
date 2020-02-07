@@ -46,8 +46,9 @@ Role: <input type="text">
  -->
 
  <div class="main-div">
-  <h2>Login Page</h2>
   <form class="example-form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <h2>Login Page</h2>
+    <div class="example-container">
     <mat-form-field class="example-full-width">
       <input
         id="username"
@@ -82,6 +83,7 @@ Role: <input type="text">
       (click)="backHome()"
       >HomePage
 </button>
+</div>
   </form>
 </div>
 

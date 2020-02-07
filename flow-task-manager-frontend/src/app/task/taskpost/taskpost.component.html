@@ -1,5 +1,6 @@
 <div class="outerdiv">
 <form class="example-form" (ngSubmit)="onSubmit()" #taskpost="ngForm">
+  <h2>Add new task</h2>
   <div class="example-container">
     <mat-select 
     placeholder="Type"
@@ -19,7 +20,7 @@
     </mat-form-field>
 
     <mat-form-field class="content">
-      <textarea rows="25"
+      <textarea rows="20"
       matInput placeholder="Content"
       [(ngModel)]="content"
       name="contentInput"></textarea>

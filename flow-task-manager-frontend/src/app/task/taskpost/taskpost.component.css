@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+h2 {
+  text-align: center;
+}
+
 .example-container > * {
   width: 100%;
 }
@@ -26,4 +30,5 @@
 
 .outerdiv {
   background-image: url("https://www.flowacademy.hu/img/Flow%20Academy%20logo_colorful.jpg");
+  padding: 1.5cm;
 }
