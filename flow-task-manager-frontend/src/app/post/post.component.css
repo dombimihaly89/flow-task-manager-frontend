@@ -5,6 +5,7 @@ table {
   background-color: rgb(215, 255, 142);
   top:50%;
   left:40%;
+  margin: auto;
 } 
 
 table, th, td {

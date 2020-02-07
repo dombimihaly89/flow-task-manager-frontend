@@ -1,3 +1,5 @@
+<div class="outerdiv">
+<table class="outertable">
 <div>
   <table >
     <tr>
@@ -16,7 +18,7 @@
         <td >Rating: {{ getRating(task) }}</td>
       </tr>
     </tfoot>
-    <button (click)="navigate('postSolution', task.id)">Add a solution</button>
+    <button mat-flat-button color="primary" (click)="navigate('postSolution', task.id)">Add a solution</button>
     Rating:
   <!--  <select [(ngModel)] = "rating" >
       <option value="1">1</option>
@@ -28,5 +30,7 @@
     <button type="submit" [disabled]="ratingButton" (click)="rate()">Rate</button> -->
   </table >
   <app-post-list [task]="task"></app-post-list>
+</div>
+</table>
 </div>
 <hr>

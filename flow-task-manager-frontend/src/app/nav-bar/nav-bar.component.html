@@ -4,17 +4,16 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list class="mat-nav-list">
       <a routerLink="taskpost" mat-list-item href="#" *ngIf="isAuthenticated">Post Task</a>
       <a routerLink="tasklist" mat-list-item href="#" *ngIf="isAuthenticated">Tasks</a>
-      <a routerLink="postSolution" mat-list-item href="#" *ngIf="isAuthenticated">Post Solution</a>
       <a routerLink="register" mat-list-item href="#">User registration</a>
       <a routerLink="login" mat-list-item href="#" *ngIf="!isAuthenticated">Login</a>
       <a (click)="onLogout()" mat-list-item href="#" *ngIf="isAuthenticated">Log Out</a>
 
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="outerdiv">
     <mat-toolbar color="primary">
       <button
         type="button"

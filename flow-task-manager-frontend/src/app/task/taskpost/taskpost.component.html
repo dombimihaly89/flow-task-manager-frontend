@@ -1,4 +1,5 @@
-<form (ngSubmit)="onSubmit()" #taskpost="ngForm">
+<div class="outerdiv">
+<form class="example-form" (ngSubmit)="onSubmit()" #taskpost="ngForm">
   <div class="example-container">
     <mat-select 
     placeholder="Type"
@@ -17,8 +18,8 @@
       name="titleInput"/>
     </mat-form-field>
 
-    <mat-form-field>
-      <textarea 
+    <mat-form-field class="content">
+      <textarea rows="25"
       matInput placeholder="Content"
       [(ngModel)]="content"
       name="contentInput"></textarea>
@@ -33,6 +34,7 @@
       <mat-option value="HARD">Hard</mat-option>
     </mat-select>
 <br>
-    <button type="submit" (ngSubmit)="onSubmit()">Submit</button>
+    <button mat-flat-button color="primary" type="submit" (ngSubmit)="onSubmit()">Submit</button>
   </div>
 </form>
+</div>
